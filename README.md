@@ -2,6 +2,8 @@
 
 Chart is a cross-platform mobile application developed using .NET MAUI. This app is designed to manage and display posts. Future plans include integration with Firebase for push notifications and REST API for full CRUD operations.
 
+**Note: This project is currently under development.**
+
 ## Features
 
 - **Main Page**: The main interface where users can view posts.
