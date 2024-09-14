@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace chart.DatabaseService
@@ -16,7 +14,8 @@ namespace chart.DatabaseService
     {
         private const string _databaseName = "lk.db";
 
-        private static string _DbPath => Path.Combine(FileSystem.AppDataDirectory, _databaseName);
+        // Укажите путь к директории, где будет создан файл базы данных
+        private static string _DbPath => Path.Combine(Path.Combine(FileSystem.AppDataDirectory), _databaseName);
 
         private SQLiteAsyncConnection? _connection;
 
@@ -35,21 +34,32 @@ namespace chart.DatabaseService
 
         public static void DatabasePath()
         {
-            Debug.WriteLine($"Existed current path is {_DbPath}");
+            Debug.WriteLine($"Current path is {_DbPath}");
         }
 
         public async Task Init()
         {
             try
             {
-                if (_connection == null)
+                var directory = Path.GetDirectoryName(_DbPath);
+                if (directory != null && !Directory.Exists(directory))
                 {
-                    _connection = SQLiteAsyncConnection;  
-                    await _connection.CreateTableAsync<Posts>();
-                    await _connection.CreateTableAsync<Categorys>(); 
-                    Debug.WriteLine("Таблицы успешно созданы");
-                    DatabasePath();
+                    Directory.CreateDirectory(directory);
                 }
+
+                // Проверяем, существует ли база данных перед созданием
+                if (!File.Exists(_DbPath))
+                {
+                    _connection = SQLiteAsyncConnection; // Инициализируем соединение
+                    await _connection.CreateTableAsync<Posts>();
+                    await _connection.CreateTableAsync<Categorys>();
+                    Debug.WriteLine("Tables successfully created");
+                }
+                else
+                {
+                    _connection = SQLiteAsyncConnection; // Если база данных существует, просто получаем соединение
+                }
+                DatabasePath();
             }
             catch (DbException ex)
             {
@@ -61,12 +71,9 @@ namespace chart.DatabaseService
             }
         }
 
-       
         public SQLiteAsyncConnection GetConnection()
         {
             return SQLiteAsyncConnection;
         }
-
-
     }
 }

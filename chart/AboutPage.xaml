@@ -3,11 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="chart.AboutPage"
              Title="About" BackgroundColor="White">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        
-    </VerticalStackLayout>
+
+
+
+    <StackLayout 
+         Grid.Row="1" 
+         BackgroundColor="White" 
+         Padding="0, 60, 0, 0">
+
+        <Border 
+         HeightRequest="200" 
+         WidthRequest="350" 
+         VerticalOptions="Center">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"></RoundRectangle>
+                </Border.StrokeShape>
+
+                <!-- Grid с одной строкой и двумя колонками -->
+                <Grid RowSpacing="0"
+              >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Grid.Row="0" BackgroundColor="Black">
+
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1" BackgroundColor="Snow">
+
+                    </StackLayout>
+
+                </Grid>
+
+
+            </Border>
+        </StackLayout>
+
+
+    
 </ContentPage>

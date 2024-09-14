@@ -8,14 +8,12 @@ namespace chart
     {
         int count = 0;
 
-        PostsViewModel _postViewModel;
-
-        public MainPage(PostsViewModel postsViewModel)
+        public MainPage(PostsViewModel postsViewModel, CategoryViewModel categoryViewModel)
         {
             InitializeComponent();
             Debug.WriteLine("Setting BindingContext");
-            this.BindingContext = postsViewModel;
-            
+            //postsCollectionView.BindingContext = postsViewModel;
+            //categoriesCollectionView.BindingContext = categoryViewModel;
         }
 
     }

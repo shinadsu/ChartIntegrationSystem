@@ -28,9 +28,12 @@ namespace chart
 
             // register repository
             builder.Services.AddSingleton<PostsRepository>();
+            builder.Services.AddSingleton<CategoryRepositorys>();
 
             // register ViewModels
             builder.Services.AddSingleton<PostsViewModel>();  // Добавляем PostsViewModel
+            builder.Services.AddSingleton<CategoryViewModel>();
+            builder.Services.AddSingleton<ManinViewModel>();
             
 
 #if DEBUG

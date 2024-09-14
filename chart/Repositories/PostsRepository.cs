@@ -27,7 +27,10 @@ namespace chart.Repositories
 
             var posts = await connection.Table<Posts>().ToListAsync();
             Debug.WriteLine($"Retrieved {posts.Count} posts from database.");
-
+            foreach (var post in posts)
+            {
+                Debug.WriteLine($"Current post id: {post.Id}\nPost Url - {post.Url} Post Title - {post.Title} Post Description - {post.Description} ");
+            }
             
             return posts;
         }

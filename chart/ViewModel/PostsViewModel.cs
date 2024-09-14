@@ -23,7 +23,7 @@ namespace chart.ViewModel.Postss
 
         public async Task LoadPostsAsync()
         {
-            IsBusy = true;  // Используем PascalCase
+            IsBusy = true;
             try
             {
                 if (_postsRepository == null)
@@ -32,7 +32,9 @@ namespace chart.ViewModel.Postss
                 var postsFromRepo = await _postsRepository.GET();
                 Debug.WriteLine($"Loaded {postsFromRepo.Count} posts");
 
-                
+                // Очистите коллекцию перед добавлением новых данных
+                posts.Clear();
+
                 foreach (var post in postsFromRepo)
                 {
                     posts.Add(post);
@@ -47,5 +49,6 @@ namespace chart.ViewModel.Postss
                 IsBusy = false;
             }
         }
+
     }
 }
